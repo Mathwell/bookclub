@@ -1,3 +1,4 @@
+module Api::V1
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :destroy]
 
@@ -48,4 +49,5 @@ class ItemsController < ApplicationController
     def item_params
       params.require(:item).permit(:type, :name, :excerpt, :description, :url, :upvotes)
     end
+end
 end

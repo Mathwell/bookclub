@@ -1,3 +1,4 @@
+module Api::V1
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :update, :destroy]
 
@@ -18,7 +19,8 @@ class ListsController < ApplicationController
     @list = List.new(list_params)
 
     if @list.save
-      render json: @list, status: :created, location: @list
+      render json: @list, status: :created
+      #render json: @list, status: :created, location: @list
     else
       render json: @list.errors, status: :unprocessable_entity
     end
@@ -48,4 +50,5 @@ class ListsController < ApplicationController
     def list_params
       params.require(:list).permit(:title, :excerpt, :description, :upvotes)
     end
+end
 end
