@@ -5,7 +5,7 @@ class ListsController < ApplicationController
   # GET /lists
   def index
     @lists = List.all
-
+    #binding.pry 
     render json: @lists
   end
 

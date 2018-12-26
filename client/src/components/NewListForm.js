@@ -3,8 +3,8 @@ import React from 'react';
 const NewListForm = ({onNewList = f => f}) => {
     let title, excerpt
     const submit = e => {
-        e.preventDefault()
-        onNewList(_title.value, _excerpt.value)
+        e.preventDefault()        
+        onNewList(title.value, excerpt.value)
         title.value = ''
         excerpt.value = ''
         title.focus()
