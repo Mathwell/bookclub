@@ -8,9 +8,13 @@ class ListsContainer extends Component {
     constructor(props){
         super(props)
         this.state = {
-            lists: []
+            lists: [],
+            editingListId: null
         }
         this.addNewList = this.addNewList.bind(this)
+        this.removeList = this.removeList.bind(this)
+        this.editingList = this.editingList.bind(this)
+        this.editList = this.editList.bind(this)
     }
     componentDidMount() {
         axios.get('/api/v1/lists')
@@ -26,6 +30,17 @@ class ListsContainer extends Component {
         fetch(`/api/v1/lists`)
         .then(response => response.json())
         .then(data=> console.log(data))
+    }
+
+    removeList(id) {
+        axios.delete( '/api/v1/lists/' + id )
+        .then(response => {
+            const lists = this.state.lists.filter(
+                list => list.id !== id
+            )
+            this.setState({lists})
+        })
+        .catch(error => console.log(error))
     }
 
     addNewList(title, excerpt) {
@@ -59,6 +74,12 @@ class ListsContainer extends Component {
         .catch(error => console.log(error));
     }
     
+    editingList(id) {
+        this.setState({
+            editingListId: id
+        })
+    }
+
     render() {
         return (
             <div className="lists-container">
